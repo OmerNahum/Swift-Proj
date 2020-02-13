@@ -59,10 +59,7 @@ class Model {
     
         
     
-    func getGroupsCount(callback: @escaping (Int) -> Void){
-        //modelsql.add(group: group)
-        modelFirebase.getGroupsCount(callback: callback)
-    }
+    
     
     func saveImage(image: UIImage, callback: @escaping (String?)-> Void ){
         FirebaseStorage.saveImage(image: image, callback: callback);
@@ -74,6 +71,9 @@ class Model {
     
     func login(user:User, callback: @escaping (Bool) -> Void) {
            modelFirebase.login(user: user, callback: callback)
+    }
+    func searchUser(userName:String, callback: @escaping (Bool) -> Void) {
+        modelFirebase.searchUser(userName: userName,callback: callback)
     }
 
 }

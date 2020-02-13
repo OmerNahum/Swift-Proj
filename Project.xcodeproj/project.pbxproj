@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D4B556823F555A5001840CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B556723F555A5001840CE /* User.swift */; };
+		3D4B556C23F5887A001840CE /* newGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B556B23F5887A001840CE /* newGroupTableViewCell.swift */; };
 		84061B9823B4C8C1006C652E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061B9723B4C8C1006C652E /* ProfileViewController.swift */; };
 		84061BA223B4CB8F006C652E /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061BA123B4CB8F006C652E /* GroupsTableViewController.swift */; };
 		84061BA423B4CEAC006C652E /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061BA323B4CEAC006C652E /* FavoritesTableViewController.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		1298E7AADF41657EB4F39932 /* Pods_ProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4B556723F555A5001840CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3D4B556B23F5887A001840CE /* newGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newGroupTableViewCell.swift; sourceTree = "<group>"; };
 		51B48F7566F35CA8E255A897 /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD4F0742FAF055AB21B2CF8 /* Pods-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectTests/Pods-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A022C2932A85C20A848BC66 /* Pods-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-ProjectTests/Pods-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				8476407F23C730B800CF1903 /* NewGroupViewController.swift */,
 				842755B723D372AB0037B79F /* LoginViewController.swift */,
 				842755B923D374080037B79F /* RegisterViewController.swift */,
+				3D4B556B23F5887A001840CE /* newGroupTableViewCell.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				84061BA223B4CB8F006C652E /* GroupsTableViewController.swift in Sources */,
 				849F9D9523C2041700FC2BB4 /* ChatViewController.swift in Sources */,
 				849F9D8F23C1FEFE00FC2BB4 /* Model.swift in Sources */,
+				3D4B556C23F5887A001840CE /* newGroupTableViewCell.swift in Sources */,
 				8473245923CDBCDC001A44A8 /* ModelEvents.swift in Sources */,
 				8476408423C7417400CF1903 /* ModelFirebase.swift in Sources */,
 				8473245B23CDD3B6001A44A8 /* FirebaseStorage.swift in Sources */,

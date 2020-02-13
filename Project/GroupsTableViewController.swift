@@ -12,6 +12,7 @@ import Kingfisher
 class GroupsTableViewController: UITableViewController {
 
     var data = [Group]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //data = Model.instance.getAllGroups()

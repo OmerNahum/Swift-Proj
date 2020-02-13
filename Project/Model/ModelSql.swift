@@ -47,12 +47,12 @@ class ModelSql{
            // let id = group.id?.description.cString(using: .utf8);
             let name = group.name.cString(using: .utf8);
             let image = group.image.cString(using: .utf8);
-            let participants = group.participants.cString(using: .utf8);
+            //let participants = group.participants.cString(using: .utf8);
 
             //sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 2, name,-1,nil);
             sqlite3_bind_text(sqlite3_stmt, 3, image,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 4, participants,-1,nil);
+            //sqlite3_bind_text(sqlite3_stmt, 4, participants,-1,nil);
             if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
                 print("new row added succefully")
             }

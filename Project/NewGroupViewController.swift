@@ -12,11 +12,16 @@ import Foundation
 
 
 
-class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CNContactPickerDelegate {
+class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CNContactPickerDelegate,UITableViewDelegate,UITableViewDataSource{
+    
+    
+    
+    
+    
     
     
     var  selectedImage: UIImage?;
-    var contacts:String? = "";
+    
     
     
     
@@ -32,14 +37,55 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var createBtn: UIButton!
     
-    @IBOutlet weak var addContactBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var addError: UILabel!
+    
+    @IBOutlet weak var participantTxt: UITextField!
+    
+    @IBAction func addBtn(_ sender: Any) {
+        
+        self.addError.isHidden = true
+        
+        Model.instance.searchUser(userName: participantTxt.text!){ success in
+            if(success){
+                self.emails.append(self.participantTxt.text!)
+                self.tableView.reloadData()
+            }
+            else{
+                self.addError.isHidden = false
+            }
+            
+            
+        }
+        
+        
+    }
+    var emails = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addError.isHidden = true
         activity.isHidden = true;
+        tableView.dataSource = self
+        tableView.delegate = self
         // Do any additional setup after loading the view.
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return emails.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:newGroupTableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! newGroupTableViewCell
+        let part = emails[indexPath.row]
+        cell.textLabel!.text = part
+        return cell
+    }
+    
+    
     
     @IBAction func addContactBtn(_ sender: Any) {
         let contactPicker = CNContactPickerViewController();
@@ -66,19 +112,19 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         self.createBtn.isEnabled = false;
         self.activity.isHidden = false;
         self.addPicBtn.isEnabled = false;
-        self.addContactBtn.isEnabled = false;
+        
         
         if let selectedImage = selectedImage {
             Model.instance.saveImage(image: selectedImage) { (url) in
                 
-                let group = Group(name: self.groupName.text!, image: url!, participants: self.contacts!);
+                let group = Group(name: self.groupName.text!, image: url!, participants: self.emails);
                 Model.instance.add(group: group){
                     self.navigationController?.popViewController(animated: true);
                 }
             }
             // todo no pic
         }else{
-            let group = Group(name: self.groupName.text!, image: "", participants: self.contacts! );
+            let group = Group(name: self.groupName.text!, image: "", participants: self.emails);
             Model.instance.add(group: group){ 
                 self.navigationController?.popViewController(animated: true);
             }
@@ -109,8 +155,16 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         for contact in contacts{
             print(contact.givenName);
             print(contact.phoneNumbers[0].value);
-            self.contacts?.append(contentsOf: contact.givenName + ",");
+            //self.contacts?.append(contentsOf: contact.givenName + ",");
         }
         dismiss(animated: true, completion: nil);
     }
+    
+    
+    @IBAction func favButton(_ sender: Any) {
+    }
+    
+    
+    
+    
 }

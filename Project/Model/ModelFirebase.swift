@@ -17,13 +17,18 @@ class ModelFirebase{
         // var ref: DocumentReference? = nil
         //        var ref: DocumentReference? = nil
         let json = group.toJson()
-        db.collection("groups").document().setData(json){
+        let db2 = db.collection("groups").document()
+        db2.setData(json){
             err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
                 ModelEvents.GroupDataEvent.post();
+                db2.updateData([
+                    "id": db2.documentID
+                ])
+                
             }
         }
         
@@ -72,12 +77,6 @@ class ModelFirebase{
     }
     
     
-    
-    func getGroupsCount(callback: @escaping (Int)->Void){
-        print(db.collection("groups").accessibilityElementCount())
-        callback(db.collection("groups").accessibilityElementCount());
-    }
-    
     func addUser(user: User, callback: @escaping (Bool) -> Void){
         // var ref: DocumentReference? = nil
         //        var ref: DocumentReference? = nil
@@ -102,29 +101,41 @@ class ModelFirebase{
             
         }
     }
-        
-        func login(user: User, callback: @escaping (Bool) -> Void){
-            Auth.auth().signIn(withEmail: user.email, password: user.password) { [weak self] authResult, error in
-                if let err = error{
-                    print("Login error: \(err)")
-                    callback(false)
-                }else{
-                    print("Logged in")
+    
+    func login(user: User, callback: @escaping (Bool) -> Void){
+        Auth.auth().signIn(withEmail: user.email, password: user.password) { [weak self ] authResult, error in
+            if let err = error{
+                print("Login error: \(err)")
+                callback(false)
+            }else{
+                print("Logged in")
+                callback(true)
+            }
+            
+        }
+    }
+    
+    //        ref = db.collection("groups").addDocument(data:group.toJson(), completion: { err in
+    //            if let err = err {
+    //                print("Error adding document: \(err)")
+    //            } else {
+    //                print("Document added with ID: \(ref!.documentID)")
+    //                ModelEvents.GroupDataEvent.post();
+    //            }
+    //        })
+    func searchUser(userName: String, callback: @escaping (Bool) -> Void){
+        db.collection("users").whereField("email", isEqualTo: userName).getDocuments(){(querySnapshot,err) in
+            if let err = err{
+                print("Error getting user: \(err)")
+                callback(false)
+            }else{
+                if(querySnapshot?.count == 1){
                     callback(true)
                 }
-                
             }
+            
         }
-        
-        //        ref = db.collection("groups").addDocument(data:group.toJson(), completion: { err in
-        //            if let err = err {
-        //                print("Error adding document: \(err)")
-        //            } else {
-        //                print("Document added with ID: \(ref!.documentID)")
-        //                ModelEvents.GroupDataEvent.post();
-        //            }
-        //        })
-        
-        
+    }
+    
 }
 
