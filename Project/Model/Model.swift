@@ -67,6 +67,14 @@ class Model {
     func saveImage(image: UIImage, callback: @escaping (String?)-> Void ){
         FirebaseStorage.saveImage(image: image, callback: callback);
     }
+    
+    func addUser(user:User, callback: @escaping (Bool) -> Void) {
+        modelFirebase.addUser(user: user, callback: callback)
+    }
+    
+    func login(user:User, callback: @escaping (Bool) -> Void) {
+           modelFirebase.login(user: user, callback: callback)
+    }
 
 }
 
