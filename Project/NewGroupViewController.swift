@@ -55,7 +55,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
             else{
                 self.addError.isHidden = false
             }
-            
+            //test
             
         }
         
