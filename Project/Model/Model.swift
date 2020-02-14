@@ -62,7 +62,7 @@ class Model {
     
     
     func saveImage(image: UIImage, callback: @escaping (String?)-> Void ){
-        FirebaseStorage.saveImage(image: image, callback: callback);
+        FirebaseStorage.saveImage(image: image, callback: callback)
     }
     
     func addUser(user:User, callback: @escaping (Bool) -> Void) {
@@ -74,6 +74,12 @@ class Model {
     }
     func searchUser(userName:String, callback: @escaping (Bool) -> Void) {
         modelFirebase.searchUser(userName: userName,callback: callback)
+    }
+    func editUser(name:String, image:String,callback: @escaping () -> Void){
+        modelFirebase.editUser(name: name,image: image, callback: callback)
+    }
+    func currentUser(callback: @escaping (User) -> Void){
+        modelFirebase.currentUser(callback: callback)
     }
 
 }

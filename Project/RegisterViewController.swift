@@ -25,6 +25,7 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet weak var passwordVar: UITextField!
     
+    @IBOutlet weak var fullNameTxt: UITextField!
     
     @IBOutlet weak var errLabel: UILabel!
     
@@ -39,7 +40,7 @@ class RegisterViewController: UIViewController {
      */
     @IBAction func registerBtn(_ sender: Any) {
         if(passwordTxt.text! == passwordVar.text!){
-            Model.instance.addUser(user: User(email: userNameTxt.text!,password: passwordTxt.text!)){
+            Model.instance.addUser(user: User(name: fullNameTxt.text!, email: userNameTxt.text!,password: passwordTxt.text!)){
                 
                 (success) in
                 if (success == true){

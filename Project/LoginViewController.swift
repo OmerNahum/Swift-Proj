@@ -36,8 +36,8 @@ class LoginViewController: UIViewController {
     }
     */
     @IBAction func logInBtn(_ sender: Any) {
-         
-                  Model.instance.login(user: User(email: usernameTxt.text!,password: password.text!)){
+        
+        Model.instance.login(user: User(email: usernameTxt.text!,password: password.text!)){
                       
                       (success) in
                       if (success == true){
