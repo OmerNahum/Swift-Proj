@@ -32,6 +32,15 @@ class Group{
         //self.lastUpdate = ts.seconds
         
     }
+    init(json:[String:Any]){
+        self.id = json["id"] as! String;
+        self.name = json["name"] as! String;
+        self.image = json["image"] as! String;
+        self.participants = json["participants"] as! [String];
+        //let ts = json["lastUpdate"] as! Timestamp
+        //self.lastUpdate = ts.seconds
+        
+    }
     
     func toJson() -> [String:Any] {
         var json = [String:Any]();

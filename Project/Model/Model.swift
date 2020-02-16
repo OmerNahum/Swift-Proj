@@ -72,7 +72,7 @@ class Model {
     func login(user:User, callback: @escaping (Bool) -> Void) {
            modelFirebase.login(user: user, callback: callback)
     }
-    func searchUser(userName:String, callback: @escaping (Bool) -> Void) {
+    func searchUser(userName:String, callback: @escaping (User?) -> Void) {
         modelFirebase.searchUser(userName: userName,callback: callback)
     }
     func editUser(name:String, image:String,callback: @escaping () -> Void){
@@ -84,6 +84,12 @@ class Model {
     func editGroup(group:Group,callback: @escaping () -> Void){
         modelFirebase.editGroup(group:group, callback: callback)
      }
+    func deleteUser(user:User, group:Group, callback: @escaping () -> Void){
+        modelFirebase.deleteUser(user: user, group: group, callback: callback)
+    }
+    func addUserByOther(user:User, group:Group, callback: @escaping () -> Void){
+        modelFirebase.addUserByOther(user: user, group: group, callback: callback)
+    }
 
 }
 

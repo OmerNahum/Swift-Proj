@@ -23,13 +23,23 @@ class User {
         self.password = password
         
     }
-   
+    
     init(email:String, password:String) {
         self.email = email
         self.password = password
         
     }
-    
+    init(json:[String:Any]){
+        self.id = json["id"] as! String;
+        self.name = json["name"] as! String;
+        self.image = json["image"] as! String;
+        self.email = json["email"] as! String
+        self.groups = json["groups"] as! [String]
+        self.password = json["password"] as! String
+        //let ts = json["lastUpdate"] as! Timestamp
+        //self.lastUpdate = ts.seconds
+        
+    }
     
     func toJson() -> [String:Any] {
         var json = [String:Any]();
@@ -41,6 +51,6 @@ class User {
         json["image"] = self.image
         //json["lastUpdate"] = FieldValue.serverTimestamp();
         return json
-      }
+    }
     
 }

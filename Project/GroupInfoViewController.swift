@@ -41,7 +41,7 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
         }
     }
     @IBAction func saveBtn(_ sender: Any) {
-        group?.name = addOrDeleteTxt.text!
+        group?.name = infoName!.text!
         if(selectedImage != nil){
             Model.instance.saveImage(image: self.selectedImage!){ url in
                 self.group?.image = url!
@@ -59,6 +59,7 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
     @IBOutlet weak var addOrDeleteTxt: UITextField!
     
     var group: Group?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,31 +96,32 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
         dismiss(animated: true, completion: nil);
     }
     func editUser(string:String){
-        
-        
+        alreadyExistLabel.isHidden = true
+        wrongUserLabel.isHidden = true
         if(string == "add" && group!.participants.contains(addOrDeleteTxt.text!)){
             alreadyExistLabel.isHidden = false
         }
         else{
-            Model.instance.searchUser(userName: addOrDeleteTxt.text!){ success in
-                if(!success){
-                    self.wrongUserLabel.isHidden = false
-                }else{
+            Model.instance.searchUser(userName: addOrDeleteTxt.text!){ (user:User?) in
+                if let user = user {
                     if(string == "add"){
                         self.group?.participants.append(self.addOrDeleteTxt.text!)
-                        
+                        Model.instance.addUserByOther(user: user, group: self.group!){}
                     }
                     else{
                         print("before delete")
-                            
-                        }
+                        self.group?.participants.removeAll(where: {$0 == self.addOrDeleteTxt.text})
+                        Model.instance.deleteUser(user: user, group: self.group!){}
                         print("DELETED FROM PARTICIPANTS")
                     }
+                }else{
+                    self.wrongUserLabel.isHidden = false
                 }
-                
+                 self.tableView.reloadData()
             }
-        Model.instance.editUser(name: self.addOrDeleteTxt.text!, image: ""){}
-        self.tableView.reloadData()
+            self.tableView.reloadData()
+        }
+        
     }
     
     

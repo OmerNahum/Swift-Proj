@@ -43,14 +43,22 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var participantTxt: UITextField!
     
+    @IBOutlet weak var existError: UILabel!
     @IBAction func addBtn(_ sender: Any) {
         
         self.addError.isHidden = true
+        self.existError.isHidden = true
         
-        Model.instance.searchUser(userName: participantTxt.text!){ success in
-            if(success){
+        Model.instance.searchUser(userName: participantTxt.text!){ (user:User?) in
+            if(user != nil){
                 print("sucess")
-                self.emails.append(self.participantTxt.text!)
+                print(self.emails)
+                if(!self.emails.contains(self.participantTxt.text!)){
+                    self.emails.append(self.participantTxt.text!)
+                }
+                else{
+                    self.existError.isHidden = false
+                }
                 self.tableView.reloadData()
             }else{
                 self.addError.isHidden = false
@@ -65,6 +73,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        existError.isHidden = true
         addError.isHidden = true
         activity.isHidden = true;
         tableView.dataSource = self
@@ -86,12 +95,12 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     
-//    @IBAction func addContactBtn(_ sender: Any) {
-//        let contactPicker = CNContactPickerViewController();
-//        contactPicker.delegate = self;
-//        contactPicker.displayedPropertyKeys = [CNContactGivenNameKey, CNContactPhoneNumbersKey];
-//        self.present(contactPicker,animated: true, completion: nil);
-//    }
+    //    @IBAction func addContactBtn(_ sender: Any) {
+    //        let contactPicker = CNContactPickerViewController();
+    //        contactPicker.delegate = self;
+    //        contactPicker.displayedPropertyKeys = [CNContactGivenNameKey, CNContactPhoneNumbersKey];
+    //        self.present(contactPicker,animated: true, completion: nil);
+    //    }
     
     @IBAction func addPictureBtn(_ sender: Any) {
         
@@ -112,7 +121,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         self.activity.isHidden = false;
         self.addPicBtn.isEnabled = false;
         self.addBtnOutlet.isEnabled = false;
-       
+        
         
         
         if let selectedImage = selectedImage {
@@ -125,9 +134,10 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
             // todo no pic
         }else{
             let group = Group(name: self.groupName.text!, image: "", participants: self.emails);
-            Model.instance.add(group: group){ 
+            Model.instance.add(group: group){
                 self.navigationController?.popViewController(animated: true);
             }
+            emails.removeAll()
         }
         
         
@@ -150,7 +160,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil);
     }
     
-
+    
     
     
     @IBAction func favButton(_ sender: Any) {
