@@ -14,16 +14,8 @@ import Foundation
 
 class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource{
     
-    
-    
-    
-    
-    
-    
+   
     var  selectedImage: UIImage?;
-    
-    
-    
     
     @IBOutlet weak var groupName: UITextField!
     
@@ -50,8 +42,6 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         
         Model.instance.searchUser(userName: participantTxt.text!){ (user:User?) in
             if(user != nil){
-                print("sucess")
-                print(self.emails)
                 if(!self.emails.contains(self.participantTxt.text!)){
                     self.emails.append(self.participantTxt.text!)
                 }

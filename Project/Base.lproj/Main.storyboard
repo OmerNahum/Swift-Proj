@@ -496,10 +496,13 @@
                     <navigationItem key="navigationItem" id="T5O-Hd-1nE"/>
                     <connections>
                         <outlet property="addOrDeleteTxt" destination="QuA-9V-ZGt" id="m2o-Ty-Lei"/>
+                        <outlet property="addPartOutlet" destination="fDl-ie-Wng" id="UYy-KW-Zdd"/>
                         <outlet property="alreadyExistLabel" destination="qlv-Q4-ULN" id="Sxv-YV-Aw3"/>
                         <outlet property="deleteGroupOutlet" destination="Ycl-R2-qV8" id="mpb-g6-aap"/>
+                        <outlet property="deletePartOutlet" destination="Msv-Of-DBj" id="RDR-7N-W4u"/>
                         <outlet property="image" destination="SyY-OT-fq9" id="aFR-ow-NJb"/>
                         <outlet property="infoName" destination="JVX-cy-vhr" id="brX-p6-SnO"/>
+                        <outlet property="saveOutlet" destination="h7F-Uc-n1Y" id="aGd-O2-sEo"/>
                         <outlet property="tableView" destination="v0y-Ax-wLz" id="T2g-0M-0nx"/>
                         <outlet property="wrongUserLabel" destination="YBq-Dh-rCv" id="F76-Mh-PVb"/>
                     </connections>

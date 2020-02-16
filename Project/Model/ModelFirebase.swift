@@ -38,32 +38,25 @@ class ModelFirebase{
                             print("error finding user: \(err)")
                         }else{
                             let document = querySnapshot!.documents.first
-                            let groups = User(name: "",email: part, password: document!.get("password") as! String)
-                            groups.groups = document!.get("groups") as! [String]
-                            groups.groups.append(db2.documentID)
-                            
-                            
-                            document?.reference.updateData([
-                                "groups": groups.groups
-                            ])
+                            //let user = User(name: "",email: part, password: document!.get("password") as! String)
+                            self.searchUser(userName: part){user in
+                                if let user = user{
+                                    user.groups = document!.get("groups") as! [String]
+                                    user.groups.append(db2.documentID)
+                                    
+                                    
+                                    document?.reference.updateData([
+                                        "groups": user.groups
+                                    ])
+                                }
+                            }
                         }
                     }
                     
                 }
             }
-            
-            
         }
         
-        
-        //        ref = db.collection("groups").addDocument(data:group.toJson(), completion: { err in
-        //            if let err = err {
-        //                print("Error adding document: \(err)")
-        //            } else {
-        //                print("Document added with ID: \(ref!.documentID)")
-        //                ModelEvents.GroupDataEvent.post();
-        //            }
-        //        })
         callback()
     }
     
@@ -92,10 +85,10 @@ class ModelFirebase{
                 callback(nil);
             } else {
                 var data = [Group]();
-                for document in querySnapshot!.documents {
-                    let part = document.get("participants") as! [String]
+                for group in querySnapshot!.documents {
+                    let part = group.get("participants") as! [String]
                     if(part.contains((user?.email)!)){
-                        data.append(Group(json: document.data(),id: document.documentID));
+                        data.append(Group(json: group.data(),id: group.documentID));
                     }
                 }
                 callback(data);
@@ -258,16 +251,16 @@ class ModelFirebase{
     func deleteGroup(group:Group, callback: @escaping () -> Void) {
         
         db.collection("groups").whereField("id", isEqualTo: group.id).getDocuments() { (querySnapshot, err) in
-          if let err = err {
-            print("Error getting documents: \(err)")
-          } else {
-            for document in querySnapshot!.documents {
-              document.reference.delete()
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    document.reference.delete()
+                }
+                callback()
             }
-            callback()
-          }
         }
-       
+        
     }
-   
+    
 }

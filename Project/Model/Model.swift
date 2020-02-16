@@ -17,6 +17,7 @@ class Model {
     
     
     private init(){
+        
     }
     
     var data = [Group]()
@@ -93,6 +94,14 @@ class Model {
     func deleteGroup(group:Group, callback: @escaping () -> Void){
         modelFirebase.deleteGroup(group: group, callback: callback)
     }
+    
+   func setLastUpdate(lastUpdated:Int64){
+    return modelsql.setLastUpdateDate(email: "LAST_UPDATE_DATE", lud: lastUpdated);
+    }
+      
+    func getLastUpdateDate()->Int64{
+        return modelsql.getLastUpdateDate(id: "LAST_UPDATE_DATE")
+      }
 
 }
 

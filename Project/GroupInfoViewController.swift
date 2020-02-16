@@ -23,11 +23,13 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
     @IBAction func addPartBtn(_ sender: Any) {
         self.editUser(string: "add")
     }
+    @IBOutlet weak var addPartOutlet: UIButton!
     @IBOutlet weak var wrongUserLabel: UILabel!
     @IBOutlet weak var alreadyExistLabel: UILabel!
     @IBAction func deletePartBtn(_ sender: Any) {
         self.editUser(string: "delete")
     }
+    @IBOutlet weak var deletePartOutlet: UIButton!
     @IBAction func changePicBtn(_ sender: Any) {
         
         if UIImagePickerController.isSourceTypeAvailable(
@@ -42,6 +44,9 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
     }
     @IBAction func saveBtn(_ sender: Any) {
         deleteGroupOutlet.isEnabled = false
+        deletePartOutlet.isEnabled = false
+        addPartOutlet.isEnabled = false
+        
         group?.name = infoName!.text!
         if(selectedImage != nil){
             Model.instance.saveImage(image: self.selectedImage!){ url in
@@ -55,9 +60,12 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
         
         
     }
+    @IBOutlet weak var saveOutlet: UIButton!
     @IBOutlet weak var deleteGroupOutlet: UIButton!
     @IBAction func deleteGroup(_ sender: Any) {
-        
+        saveOutlet.isEnabled = false
+        deletePartOutlet.isEnabled = false
+        addPartOutlet.isEnabled = false
         for part in group!.participants{
             Model.instance.searchUser(userName: part){ user in
                 if let user = user {
@@ -66,7 +74,7 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
             }
         }
         Model.instance.deleteGroup(group: group!){
-           let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
             self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
             viewControllers[viewControllers.count - 3].viewDidLoad()
         }
@@ -135,7 +143,7 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
                 }else{
                     self.wrongUserLabel.isHidden = false
                 }
-                 self.tableView.reloadData()
+                self.tableView.reloadData()
             }
             self.tableView.reloadData()
         }
