@@ -12,6 +12,8 @@ class newGroupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var participantName: UILabel!
     
+    @IBOutlet weak var infoGroupLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

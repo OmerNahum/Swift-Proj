@@ -81,6 +81,9 @@ class Model {
     func currentUser(callback: @escaping (User) -> Void){
         modelFirebase.currentUser(callback: callback)
     }
+    func editGroup(group:Group,callback: @escaping () -> Void){
+        modelFirebase.editGroup(group:group, callback: callback)
+     }
 
 }
 
