@@ -59,6 +59,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
             
         }
     }
+    @IBOutlet weak var addBtnOutlet: UIButton!
     var emails = [String]()
     
     override func viewDidLoad() {
@@ -110,6 +111,8 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         self.createBtn.isEnabled = false;
         self.activity.isHidden = false;
         self.addPicBtn.isEnabled = false;
+        self.addBtnOutlet.isEnabled = false;
+       
         
         
         if let selectedImage = selectedImage {

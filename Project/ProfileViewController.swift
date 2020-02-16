@@ -55,11 +55,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
          if let selectedImage = selectedImage {
              Model.instance.saveImage(image: selectedImage) { (url) in
                 Model.instance.editUser(name: self.nameTxt.text!, image: url!){
-                    self.navigationController?.popViewController(animated: true);
+                     self.tabBarController?.selectedIndex = 0
 
                 }
              }
         }
+         else {
+            Model.instance.editUser(name: self.nameTxt.text!, image: ""){
+                self.tabBarController?.selectedIndex = 0
+        }
+    }
     }
 //    @IBAction func nameText(_ sender: UITextField) {
 //    }

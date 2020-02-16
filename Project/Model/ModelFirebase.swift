@@ -171,12 +171,14 @@ class ModelFirebase{
         db.collection("users").whereField("email", isEqualTo: user?.email).getDocuments(){(querySnapShot, err) in
             if let err = err{
                 print("error finding user: \(err)")
+                
             }else{
                 let doc = querySnapShot?.documents.first
                 doc?.reference.updateData([
                     "name" : name,
                     "image": image
                 ])
+                  
             }
         }
         callback()

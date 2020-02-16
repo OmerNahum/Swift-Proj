@@ -11,7 +11,8 @@ import UIKit
 class GroupInfoViewController: UIViewController {
 
     
-    @IBOutlet weak var infoName: UILabel!
+    @IBOutlet weak var infoName: UITextField!
+    
     @IBOutlet weak var image: UIImageView!
     
     var group: Group?
