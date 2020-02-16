@@ -17,7 +17,9 @@ class ModelFirebase{
         // var ref: DocumentReference? = nil
         //        var ref: DocumentReference? = nil
         let user  = Auth.auth().currentUser
-        group.participants.append(user!.email!)
+        if(!group.participants.contains((user?.email)!)){
+            group.participants.append(user!.email!)
+        }
         let json = group.toJson()
         let db2 = db.collection("groups").document()
         db2.setData(json){
@@ -231,25 +233,41 @@ class ModelFirebase{
         
     }
     func editGroup(group:Group,callback: @escaping () -> Void){
-          
+        
         db.collection("groups").whereField("id", isEqualTo: group.id).getDocuments(){(querySnapShot, err) in
-              if let err = err{
-                  print("error finding user: \(err)")
-                  
-              }else{
-                  let doc = querySnapShot?.documents.first
-                  doc?.reference.updateData([
+            if let err = err{
+                print("error finding user: \(err)")
+                
+            }else{
+                let doc = querySnapShot?.documents.first
+                doc?.reference.updateData([
                     "id": group.id,
                     "image": group.image,
                     "name" : group.name,
                     "participants": group.participants
                     
-                     
-                  ])
-                  
-              }
-          }
-          callback()
+                    
+                ])
+                
+            }
+        }
+        callback()
         
     }
+    
+    func deleteGroup(group:Group, callback: @escaping () -> Void) {
+        
+        db.collection("groups").whereField("id", isEqualTo: group.id).getDocuments() { (querySnapshot, err) in
+          if let err = err {
+            print("Error getting documents: \(err)")
+          } else {
+            for document in querySnapshot!.documents {
+              document.reference.delete()
+            }
+            callback()
+          }
+        }
+       
+    }
+   
 }

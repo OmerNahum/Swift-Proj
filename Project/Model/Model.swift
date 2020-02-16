@@ -90,6 +90,9 @@ class Model {
     func addUserByOther(user:User, group:Group, callback: @escaping () -> Void){
         modelFirebase.addUserByOther(user: user, group: group, callback: callback)
     }
+    func deleteGroup(group:Group, callback: @escaping () -> Void){
+        modelFirebase.deleteGroup(group: group, callback: callback)
+    }
 
 }
 

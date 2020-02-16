@@ -41,6 +41,7 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
         }
     }
     @IBAction func saveBtn(_ sender: Any) {
+        deleteGroupOutlet.isEnabled = false
         group?.name = infoName!.text!
         if(selectedImage != nil){
             Model.instance.saveImage(image: self.selectedImage!){ url in
@@ -52,6 +53,23 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
             self.navigationController?.popViewController(animated: true);
         }
         
+        
+    }
+    @IBOutlet weak var deleteGroupOutlet: UIButton!
+    @IBAction func deleteGroup(_ sender: Any) {
+        
+        for part in group!.participants{
+            Model.instance.searchUser(userName: part){ user in
+                if let user = user {
+                    Model.instance.deleteUser(user: user, group: self.group!){}
+                }
+            }
+        }
+        Model.instance.deleteGroup(group: group!){
+           let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            viewControllers[viewControllers.count - 3].viewDidLoad()
+        }
         
     }
     @IBOutlet weak var tableView: UITableView!

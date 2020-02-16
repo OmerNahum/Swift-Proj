@@ -29,7 +29,6 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     
     @IBOutlet weak var image: UIImageView!
     
-    @IBOutlet weak var contactsScrollView: UIScrollView!
     
     @IBOutlet weak var addPicBtn: UIButton!
     
@@ -79,6 +78,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
