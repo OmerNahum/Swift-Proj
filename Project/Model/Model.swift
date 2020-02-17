@@ -17,9 +17,11 @@ class Model {
     var modelFirebase:ModelFirebase = ModelFirebase();
     
     
-    private init(){
-        
-    }
+//    private init(){
+//        modelsql.setLastUpdateDate(name: "GROUPS", lud: 13)
+//        let lud = modelsql.getLastUpdateDate(name: "GROUPS")
+//        print("\(lud)")
+//    }
     
     //var groups = [Group]()
     
@@ -35,49 +37,59 @@ class Model {
         //get the current user:
         
         let user = Auth.auth().currentUser
-        
+        var usersGroups = [Group]()
         
         
         // get the local last update
-//        let lud = modelsql.getLastUpdateDate(id: "GROUPS")
-//
-//        // get the records from firebase since the local last update data
-//        modelFirebase.getAllGroups(since:lud) { (groupData) in
-//             //save the new record to the local db
-//            var localLud: Int64 = 0;
-//            for group in groupData!{
-//                self.modelsql.add(group: group)
-//                if(group.lastUpdate > localLud){
-//                    localLud = group.lastUpdate
-//                }
-//            }
-//        //save the new local last update date
-//
-//            self.modelsql.setLastUpdateDate(id: "GROUPS", lud: localLud)
-//
-//
-//        //get the complete data from the local db
-//            let completeData = self.modelsql.getAllGroups();
-//
-//        //return the complete data to the caller
-//
-//            callback(completeData);
-        
-        modelFirebase.getAllGroups(){(groups: [Group]?) in
-            var usersData = [Group]();
-            if let groups = groups{
-                for group in groups{
-                     let part = group.participants
-                           if(part.contains((user?.email)!)){
-                            usersData.append(group)
-                           }
+        let lud = modelsql.getLastUpdateDate(name: "GROUPS")
+
+         //get the records from firebase since the local last update data
+        modelFirebase.getAllGroups(since:lud) { (groupData) in
+             //save the new record to the local db
+            var localLud: Int64 = 0;
+            for group in groupData!{
+                self.modelsql.add(group: group)
+                if(group.lastUpdate > localLud){
+                    localLud = group.lastUpdate
                 }
-                callback(usersData)
             }
+            
+        //save the new local last update date
+
+            self.modelsql.setLastUpdateDate(name: "GROUPS", lud: localLud)
+
+
+        //get the groups from the local db
+            let groups = self.modelsql.getAllGroups();
+
+        //return the complete groups to the user that logged on.
+
+             for group in groups{
+                let part = group.participants
+                    if(part.contains((user?.email)!)){
+                    usersGroups.append(group)
+                        }
+                    }
+            
+            
+                callback(usersGroups)
         }
-        
-        }
-    
+    }
+//        modelFirebase.getAllGroups(since:lud){(groups: [Group]?) in
+//            var usersData = [Group]();
+//            if let groups = groups{
+//                for group in groups{
+//                     let part = group.participants
+//                           if(part.contains((user?.email)!)){
+//                            usersData.append(group)
+//                           }
+//                }
+//                callback(usersData)
+//            }
+//        }
+//
+//        }
+//
     
         
     

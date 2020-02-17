@@ -17,8 +17,13 @@ class Group{
     var participants:[String] = []
     var lastUpdate: Int64 = 0;
     
-    init(/*id:String,*/ name:String, image:String, participants:[String]){
-        //self.id = id;
+    init(name:String, image:String, participants:[String]){
+        self.name = name;
+        self.image = image;
+        self.participants = participants;
+    }
+    init(id:String, name:String, image:String, participants:[String]){
+        self.id = id;
         self.name = name;
         self.image = image;
         self.participants = participants;

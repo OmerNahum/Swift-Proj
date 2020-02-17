@@ -62,54 +62,38 @@ class ModelFirebase{
     
     
     
-    func getAllGroups(/*since: Int64*/callback: @escaping ([Group]?)->Void){
+    func getAllGroups(since: Int64,callback: @escaping ([Group]?)->Void){
         
-        //        db.collection("groups").order(by: "lastUpdate").start(at: [
-        //            Timestamp(seconds: since, nanoseconds: 0)]).getDocuments { (querySnapshot, err) in
-        //               if let err = err {
-        //                   print("Error getting documents: \(err)")
-        //                   callback(nil);
-        //               } else {
-        //                   var data = [Group]();
-        //                   for document in querySnapshot!.documents {
-        //                    data.append(Group(json: document.data()));
-        //                   }
-        //                   callback(data);
-        //               }
-        //           };
+                db.collection("groups").order(by: "lastUpdate").start(at: [
+                    Timestamp(seconds: since, nanoseconds: 0)]).getDocuments { (querySnapshot, err) in
+                       if let err = err {
+                           print("Error getting documents: \(err)")
+                           callback(nil);
+                       } else {
+                           var data = [Group]();
+                           for group in querySnapshot!.documents {
+                                data.append(Group(json: group.data(),id: group.documentID));
+                           }
+                           callback(data);
+                       }
+                   };
         
-//        let user = Auth.auth().currentUser
-//        db.collection("groups").getDocuments { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//                callback(nil);
-//            } else {
-//                var data = [Group]();
-//                for group in querySnapshot!.documents {
-//                    let part = group.get("participants") as! [String]
-//                    if(part.contains((user?.email)!)){
-//                        data.append(Group(json: group.data(),id: group.documentID));
-//                    }
-//                }
-//                callback(data);
-//            }
-//        };
-//
+
         
         //let user = Auth.auth().currentUser
-               db.collection("groups").getDocuments { (querySnapshot, err) in
-                   if let err = err {
-                       print("Error getting documents: \(err)")
-                       callback(nil);
-                   } else {
-                       var data = [Group]();
-                       for group in querySnapshot!.documents {
-                            data.append(Group(json: group.data(),id: group.documentID));
-                           
-                       }
-                       callback(data);
-                   }
-               };
+//               db.collection("groups").getDocuments { (querySnapshot, err) in
+//                   if let err = err {
+//                       print("Error getting documents: \(err)")
+//                       callback(nil);
+//                   } else {
+//                       var data = [Group]();
+//                       for group in querySnapshot!.documents {
+//                            data.append(Group(json: group.data(),id: group.documentID));
+//                           
+//                       }
+//                       callback(data);
+//                   }
+//               };
     }
     
     
