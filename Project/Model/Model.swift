@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class Model {
     static let instance = Model()
@@ -20,7 +21,7 @@ class Model {
         
     }
     
-    var data = [Group]()
+    //var groups = [Group]()
     
     
     func add(group: Group, callback: @escaping () -> Void){
@@ -29,6 +30,13 @@ class Model {
     }
     
     func getAllGroups(callback: @escaping ([Group]?) -> Void){
+        
+        
+        //get the current user:
+        
+        let user = Auth.auth().currentUser
+        
+        
         
         // get the local last update
 //        let lud = modelsql.getLastUpdateDate(id: "GROUPS")
@@ -54,9 +62,22 @@ class Model {
 //        //return the complete data to the caller
 //
 //            callback(completeData);
-         modelFirebase.getAllGroups(callback: callback);
+        
+        modelFirebase.getAllGroups(){(groups: [Group]?) in
+            var usersData = [Group]();
+            if let groups = groups{
+                for group in groups{
+                     let part = group.participants
+                           if(part.contains((user?.email)!)){
+                            usersData.append(group)
+                           }
+                }
+                callback(usersData)
+            }
+        }
         
         }
+    
     
         
     
@@ -95,14 +116,7 @@ class Model {
         modelFirebase.deleteGroup(group: group, callback: callback)
     }
     
-   func setLastUpdate(lastUpdated:Int64){
-    return modelsql.setLastUpdateDate(email: "LAST_UPDATE_DATE", lud: lastUpdated);
-    }
-      
-    func getLastUpdateDate()->Int64{
-        return modelsql.getLastUpdateDate(id: "LAST_UPDATE_DATE")
-      }
-
+  
 }
 
 

@@ -29,17 +29,18 @@ class ModelSql{
     func create(){
         var errormsg: UnsafeMutablePointer<Int8>? = nil
         
-        var res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS USERS(EMAIL TEXT PRIMARY KEY, NAME TEXT,IMAGE TEXT, GROUPS TEXT)", nil, nil, &errormsg);
+        var res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS GROUPS(ID TEXT PRIMARY KEY, IMAGE TEXT,NAME TEXT, PARTICIPANTS TEXT)", nil, nil, &errormsg);
         if(res != 0){
             print("error creating table");
             return
         }
-        res = sqlite3_exec(database, "DROP TABLE LAST_UPDATE_DATE", nil, nil, &errormsg);
-        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS LAST_UPDATE_DATE(EMAIL TEXT PRIMARY KEY, LUD TEXT)", nil, nil, &errormsg);
+    //    res = sqlite3_exec(database, "DROP TABLE LAST_UPDATE_DATE", nil, nil, &errormsg);
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS LAST_UPDATE_DATE(ID TEXT PRIMARY KEY, LUD TEXT)", nil, nil, &errormsg);
         if(res != 0){
             print("error creating table");
             return
         }
+
     }
     func add(group: Group){
         var sqlite3_stmt: OpaquePointer? = nil

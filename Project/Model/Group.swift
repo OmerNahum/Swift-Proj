@@ -15,7 +15,7 @@ class Group{
     var name:String = ""
     var image:String = ""
     var participants:[String] = []
-//    var lastUpdate: Int64 = 0;
+    var lastUpdate: Int64 = 0;
     
     init(/*id:String,*/ name:String, image:String, participants:[String]){
         //self.id = id;
@@ -28,8 +28,8 @@ class Group{
         self.name = json["name"] as! String;
         self.image = json["image"] as! String;
         self.participants = json["participants"] as! [String];
-        //let ts = json["lastUpdate"] as! Timestamp
-        //self.lastUpdate = ts.seconds
+        let ts = json["lastUpdate"] as! Timestamp
+        self.lastUpdate = ts.seconds
         
     }
     init(json:[String:Any]){
@@ -37,8 +37,8 @@ class Group{
         self.name = json["name"] as! String;
         self.image = json["image"] as! String;
         self.participants = json["participants"] as! [String];
-        //let ts = json["lastUpdate"] as! Timestamp
-        //self.lastUpdate = ts.seconds
+        let ts = json["lastUpdate"] as! Timestamp
+        self.lastUpdate = ts.seconds
         
     }
     
@@ -48,7 +48,7 @@ class Group{
         json["name"] = name;
         json["image"] = image;
         json["participants"] = participants;
-        //json["lastUpdate"] = FieldValue.serverTimestamp();
+        json["lastUpdate"] = FieldValue.serverTimestamp();
         return json;
       }
     
