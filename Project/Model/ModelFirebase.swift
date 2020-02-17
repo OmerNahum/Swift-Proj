@@ -78,22 +78,6 @@ class ModelFirebase{
                        }
                    };
         
-
-        
-        //let user = Auth.auth().currentUser
-//               db.collection("groups").getDocuments { (querySnapshot, err) in
-//                   if let err = err {
-//                       print("Error getting documents: \(err)")
-//                       callback(nil);
-//                   } else {
-//                       var data = [Group]();
-//                       for group in querySnapshot!.documents {
-//                            data.append(Group(json: group.data(),id: group.documentID));
-//                           
-//                       }
-//                       callback(data);
-//                   }
-//               };
     }
     
     

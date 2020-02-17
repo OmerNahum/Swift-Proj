@@ -78,7 +78,7 @@ class Model {
     
     
     func deleteGroup(group:Group, callback: @escaping () -> Void){
-      modelsql.delete(group: group)
+    modelsql.delete(group: group)
       modelFirebase.deleteGroup(group: group, callback: callback)
         
     }
