@@ -111,5 +111,31 @@ class ModelSql{
         sqlite3_finalize(sqlite3_stmt)
         return lud
     }
+    
+    
+    func delete(group: Group){
+
+              var deleteStatement: OpaquePointer? = nil
+              if sqlite3_prepare_v2(database, "DELETE FROM GROUPS WHERE GROUP_ID = ?;", -1, &deleteStatement, nil) == SQLITE_OK {
+
+                sqlite3_bind_text(deleteStatement, 1, group.id.cString(using: .utf8),-1, nil)
+
+                  if sqlite3_step(deleteStatement) == SQLITE_DONE {
+                      print("Successfully deleted row.")
+                  } else {
+                      print("Could not delete row.")
+                  }
+              } else {
+                  print("DELETE statement could not be prepared")
+              }
+
+
+
+
+              sqlite3_finalize(deleteStatement)
+
+
+              print("delete")
+       }
 }
 

@@ -75,22 +75,13 @@ class Model {
                 callback(usersGroups)
         }
     }
-//        modelFirebase.getAllGroups(since:lud){(groups: [Group]?) in
-//            var usersData = [Group]();
-//            if let groups = groups{
-//                for group in groups{
-//                     let part = group.participants
-//                           if(part.contains((user?.email)!)){
-//                            usersData.append(group)
-//                           }
-//                }
-//                callback(usersData)
-//            }
-//        }
-//
-//        }
-//
     
+    
+    func deleteGroup(group:Group, callback: @escaping () -> Void){
+      modelsql.delete(group: group)
+      modelFirebase.deleteGroup(group: group, callback: callback)
+        
+    }
         
     
     
@@ -124,9 +115,7 @@ class Model {
     func addUserByOther(user:User, group:Group, callback: @escaping () -> Void){
         modelFirebase.addUserByOther(user: user, group: group, callback: callback)
     }
-    func deleteGroup(group:Group, callback: @escaping () -> Void){
-        modelFirebase.deleteGroup(group: group, callback: callback)
-    }
+
     
   
 }
