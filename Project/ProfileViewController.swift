@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-
+    
     var selectedImage:UIImage?;
     
     var user:User?
@@ -33,54 +33,39 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         // Do any additional setup after loading the view.
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-          selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage;
-          self.image.image = selectedImage;
-          dismiss(animated: true, completion: nil);
-      }
-
+        selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage;
+        self.image.image = selectedImage;
+        dismiss(animated: true, completion: nil);
+    }
+    
     @IBAction func addPictureBtn(_ sender: Any) {
-           
-           if UIImagePickerController.isSourceTypeAvailable(
-               UIImagePickerController.SourceType.photoLibrary) {
-               let imagePicker = UIImagePickerController()
-               imagePicker.delegate = self
-               imagePicker.sourceType =
-                   UIImagePickerController.SourceType.photoLibrary;
-               imagePicker.allowsEditing = true
-               self.present(imagePicker, animated: true, completion: nil)
-           }
-       }
-    @IBAction func saveBtn(_ sender: Any) {
-         
-         if let selectedImage = selectedImage {
-             Model.instance.saveImage(image: selectedImage) { (url) in
-                Model.instance.editUser(name: self.nameTxt.text!, image: url!){
-                     self.tabBarController?.selectedIndex = 0
-
-                }
-             }
+        
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerController.SourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType =
+                UIImagePickerController.SourceType.photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
         }
-         else {
+    }
+    @IBAction func saveBtn(_ sender: Any) {
+        
+        if let selectedImage = selectedImage {
+            Model.instance.saveImage(image: selectedImage) { (url) in
+                Model.instance.editUser(name: self.nameTxt.text!, image: url!){
+                    self.tabBarController?.selectedIndex = 0
+                    
+                }
+            }
+        }
+        else {
             Model.instance.editUser(name: self.nameTxt.text!, image: ""){
                 self.tabBarController?.selectedIndex = 0
+            }
         }
     }
-    }
-//    @IBAction func nameText(_ sender: UITextField) {
-//    }
-//    @IBAction func statusText(_ sender: UITextField) {
-//    }
-//    @IBAction func numberText(_ sender: UITextField) {
-//    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-
+    
 }

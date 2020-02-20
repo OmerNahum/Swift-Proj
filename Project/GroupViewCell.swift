@@ -11,9 +11,6 @@ import UIKit
 class GroupViewCell: UITableViewCell {
 
     @IBOutlet weak var groupName: UILabel!
-    
-    @IBOutlet weak var favBtn: UIButton!
-    
     @IBOutlet weak var imageCell: UIImageView!
     
     override func awakeFromNib() {
@@ -24,7 +21,6 @@ class GroupViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

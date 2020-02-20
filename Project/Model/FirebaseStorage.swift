@@ -12,7 +12,7 @@ import Firebase
 
 class FirebaseStorage{
     
-
+    
     static func saveImage(image:UIImage, callback:@escaping (String?)->Void){
         
         let storageRef = Storage.storage().reference(forURL:"gs://groupsproj.appspot.com")
@@ -22,11 +22,10 @@ class FirebaseStorage{
         metadata.contentType = "image/jpeg"
         imageRef.putData(data!, metadata: metadata) { (metadata, error) in
             imageRef.downloadURL { (url, error) in
-            guard let downloadURL = url else {
-                // Uh-oh, an error occurred!
-                return
-            }
-            print("url: \(downloadURL)")
+                guard let downloadURL = url else {
+                    return
+                }
+                print("url: \(downloadURL)")
                 callback(downloadURL.absoluteString)
             }
         }

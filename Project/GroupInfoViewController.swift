@@ -10,26 +10,26 @@ import UIKit
 
 class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate {
     
-    
-    
-    
-    
-    
+    var group: Group?
     var selectedImage:UIImage?
+    
     @IBOutlet weak var infoName: UITextField!
-    
     @IBOutlet weak var image: UIImageView!
-    
-    @IBAction func addPartBtn(_ sender: Any) {
-        self.editUser(string: "add")
-    }
+    @IBOutlet weak var saveOutlet: UIButton!
+    @IBOutlet weak var deleteGroupOutlet: UIButton!
     @IBOutlet weak var addPartOutlet: UIButton!
     @IBOutlet weak var wrongUserLabel: UILabel!
     @IBOutlet weak var alreadyExistLabel: UILabel!
+    @IBOutlet weak var deletePartOutlet: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addOrDeleteTxt: UITextField!
+    
+    
+    
+    
     @IBAction func deletePartBtn(_ sender: Any) {
         self.editUser(string: "delete")
     }
-    @IBOutlet weak var deletePartOutlet: UIButton!
     @IBAction func changePicBtn(_ sender: Any) {
         
         if UIImagePickerController.isSourceTypeAvailable(
@@ -41,6 +41,9 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         }
+    }
+    @IBAction func addPartBtn(_ sender: Any) {
+        self.editUser(string: "add")
     }
     @IBAction func saveBtn(_ sender: Any) {
         deleteGroupOutlet.isEnabled = false
@@ -60,8 +63,7 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
         
         
     }
-    @IBOutlet weak var saveOutlet: UIButton!
-    @IBOutlet weak var deleteGroupOutlet: UIButton!
+    
     @IBAction func deleteGroup(_ sender: Any) {
         saveOutlet.isEnabled = false
         deletePartOutlet.isEnabled = false
@@ -80,11 +82,6 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
         }
         
     }
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var addOrDeleteTxt: UITextField!
-    
-    var group: Group?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,14 +148,6 @@ class GroupInfoViewController: UIViewController,UINavigationControllerDelegate,U
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
     
 }

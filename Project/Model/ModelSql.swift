@@ -34,16 +34,16 @@ class ModelSql{
             print("error creating table");
             return
         }
-
-        res = sqlite3_exec(database, "DROP TABLE GROUPS", nil, nil, &errormsg);
-
-         res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS GROUPS(GROUP_ID TEXT PRIMARY KEY,IMAGE TEXT, NAME TEXT, PARTICIPANTS TEXT)", nil, nil, &errormsg);
+        
+        //res = sqlite3_exec(database, "DROP TABLE GROUPS", nil, nil, &errormsg);
+        
+        res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS GROUPS(GROUP_ID TEXT PRIMARY KEY,IMAGE TEXT, NAME TEXT, PARTICIPANTS TEXT)", nil, nil, &errormsg);
         if(res != 0){
             print("error creating table");
             return
         }
-
-
+        
+        
     }
     func add(group: Group){
         var sqlite3_stmt: OpaquePointer? = nil
@@ -114,28 +114,28 @@ class ModelSql{
     
     
     func delete(group: Group){
-
-              var deleteStatement: OpaquePointer? = nil
-              if sqlite3_prepare_v2(database, "DELETE FROM GROUPS WHERE GROUP_ID = ?;", -1, &deleteStatement, nil) == SQLITE_OK {
-
-                sqlite3_bind_text(deleteStatement, 1, group.id.cString(using: .utf8),-1, nil)
-
-                  if sqlite3_step(deleteStatement) == SQLITE_DONE {
-                      print("Successfully deleted row.")
-                  } else {
-                      print("Could not delete row.")
-                  }
-              } else {
-                  print("DELETE statement could not be prepared")
-              }
-
-
-
-
-              sqlite3_finalize(deleteStatement)
-
-
-              print("delete")
-       }
+        
+        var deleteStatement: OpaquePointer? = nil
+        if sqlite3_prepare_v2(database, "DELETE FROM GROUPS WHERE GROUP_ID = ?;", -1, &deleteStatement, nil) == SQLITE_OK {
+            
+            sqlite3_bind_text(deleteStatement, 1, group.id.cString(using: .utf8),-1, nil)
+            
+            if sqlite3_step(deleteStatement) == SQLITE_DONE {
+                print("Successfully deleted row.")
+            } else {
+                print("Could not delete row.")
+            }
+        } else {
+            print("DELETE statement could not be prepared")
+        }
+        
+        
+        
+        
+        sqlite3_finalize(deleteStatement)
+        
+        
+        print("delete")
+    }
 }
 

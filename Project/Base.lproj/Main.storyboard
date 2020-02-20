@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZC3-ZI-o2K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZC3-ZI-o2K">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -129,12 +129,19 @@
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oyH-Yu-2GR">
+                                <rect key="frame" x="177" y="532" width="40" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="fs4-qb-0m7"/>
                     </view>
                     <connections>
+                        <outlet property="activityLogin" destination="oyH-Yu-2GR" id="kyD-J4-nth"/>
                         <outlet property="errLabel" destination="aL1-EX-LFA" id="SZQ-jX-bVO"/>
+                        <outlet property="loginOutlet" destination="ARd-TD-EJO" id="Cq5-Mt-uoC"/>
                         <outlet property="password" destination="fK5-BJ-wEP" id="cNw-8r-eiu"/>
                         <outlet property="usernameTxt" destination="RPW-Sr-YUq" id="ROn-TC-30K"/>
                         <segue destination="h3b-a4-TiY" kind="show" identifier="LoginSegue" id="t2q-D3-NVF"/>
@@ -157,7 +164,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhv-Vk-czQ">
-                                <rect key="frame" x="62" y="552" width="252" height="57"/>
+                                <rect key="frame" x="81" y="552" width="252" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="Create_btn"/>
                                 <connections>
@@ -165,19 +172,19 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="center" minimumFontSize="17" background="Password" translatesAutoresizingMaskIntoConstraints="NO" id="xpx-NA-1Lc">
-                                <rect key="frame" x="73" y="377" width="230" height="57"/>
+                                <rect key="frame" x="92" y="373" width="230" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" background="Username" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-Ui-lqR">
-                                <rect key="frame" x="73" y="287" width="230" height="57"/>
+                                <rect key="frame" x="92" y="281" width="230" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" textAlignment="center" minimumFontSize="17" background="Username" translatesAutoresizingMaskIntoConstraints="NO" id="P3c-q7-AB6">
-                                <rect key="frame" x="73" y="203" width="230" height="57"/>
+                                <rect key="frame" x="92" y="195" width="230" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -191,32 +198,39 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="One or more details is incorrect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNB-1w-0Iu">
-                                <rect key="frame" x="40" y="617" width="307" height="26"/>
+                                <rect key="frame" x="54" y="617" width="307" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="center" minimumFontSize="17" background="Password" translatesAutoresizingMaskIntoConstraints="NO" id="chL-Xm-eiZ">
-                                <rect key="frame" x="73" y="469" width="230" height="57"/>
+                                <rect key="frame" x="92" y="466" width="230" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="wUq-pO-Vjf">
-                                <rect key="frame" x="73" y="71" width="219" height="102"/>
+                                <rect key="frame" x="98" y="54" width="219" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="uhc-lZ-yp8">
+                                <rect key="frame" x="187" y="661" width="40" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="EjM-f8-Gbb"/>
                     </view>
                     <navigationItem key="navigationItem" id="c1Z-g2-hHf"/>
                     <connections>
+                        <outlet property="activityReg" destination="uhc-lZ-yp8" id="ilm-zo-jQw"/>
                         <outlet property="errLabel" destination="PNB-1w-0Iu" id="Wib-pE-vkG"/>
                         <outlet property="fullNameTxt" destination="P3c-q7-AB6" id="oNB-Kq-5eF"/>
                         <outlet property="passwordTxt" destination="xpx-NA-1Lc" id="BqM-JA-rIx"/>
                         <outlet property="passwordVar" destination="chL-Xm-eiZ" id="7Dc-F9-nIP"/>
+                        <outlet property="registerOutlet" destination="yhv-Vk-czQ" id="mwK-9P-nkd"/>
                         <outlet property="userNameTxt" destination="dWU-Ui-lqR" id="Jvt-s6-PlZ"/>
                     </connections>
                 </viewController>
@@ -237,7 +251,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="79D-6U-dlA" kind="relationship" relationship="viewControllers" id="fJE-89-J2U"/>
-                        <segue destination="YCG-c3-Mrc" kind="relationship" relationship="viewControllers" id="wTB-PW-lwl"/>
                         <segue destination="x2q-3E-4de" kind="relationship" relationship="viewControllers" id="pAF-3i-Woy"/>
                     </connections>
                 </tabBarController>
@@ -267,14 +280,6 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlG-Vx-VVV">
-                                            <rect key="frame" x="371" y="32" width="30" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button" image="star" catalog="system"/>
-                                            <connections>
-                                                <action selector="favButton:" destination="bWM-qt-WLc" eventType="touchUpInside" id="tlC-1f-Vo5"/>
-                                            </connections>
-                                        </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="1Gu-bv-Tno">
                                             <rect key="frame" x="20" y="6" width="76" height="97"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -282,7 +287,6 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="favBtn" destination="BlG-Vx-VVV" id="dqv-Ve-4gH"/>
                                     <outlet property="groupName" destination="RUQ-so-wSy" id="atL-Jh-r2O"/>
                                     <outlet property="imageCell" destination="1Gu-bv-Tno" id="PAN-V6-uaf"/>
                                 </connections>
@@ -317,35 +321,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HNk-xV-Cn9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="644.92753623188412" y="-855.13392857142856"/>
-        </scene>
-        <!--Favorites-->
-        <scene sceneID="L8U-YK-Hnf">
-            <objects>
-                <tableViewController id="YCG-c3-Mrc" customClass="FavoritesTableViewController" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lct-m3-g3Y">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="NKx-E2-mpo">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NKx-E2-mpo" id="bfQ-cz-JbJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="YCG-c3-Mrc" id="lNb-vX-nbq"/>
-                            <outlet property="delegate" destination="YCG-c3-Mrc" id="sve-AL-fmj"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="star" catalog="system" id="TqB-wE-Khr"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NUk-Hk-dgs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="172" y="-188"/>
         </scene>
         <!--Group chat-->
         <scene sceneID="hqn-Cv-612">
@@ -675,6 +650,5 @@
         <image name="person.3" catalog="system" width="72" height="35"/>
         <image name="person.crop.circle" catalog="system" width="64" height="60"/>
         <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="star" catalog="system" width="64" height="58"/>
     </resources>
 </document>

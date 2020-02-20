@@ -11,7 +11,6 @@
 		3D4B556C23F5887A001840CE /* newGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4B556B23F5887A001840CE /* newGroupTableViewCell.swift */; };
 		84061B9823B4C8C1006C652E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061B9723B4C8C1006C652E /* ProfileViewController.swift */; };
 		84061BA223B4CB8F006C652E /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061BA123B4CB8F006C652E /* GroupsTableViewController.swift */; };
-		84061BA423B4CEAC006C652E /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84061BA323B4CEAC006C652E /* FavoritesTableViewController.swift */; };
 		842755B823D372AB0037B79F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842755B723D372AB0037B79F /* LoginViewController.swift */; };
 		842755BA23D374080037B79F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842755B923D374080037B79F /* RegisterViewController.swift */; };
 		84681D1B238ECF48000BE570 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84681D1A238ECF48000BE570 /* AppDelegate.swift */; };
@@ -66,7 +65,6 @@
 		6A022C2932A85C20A848BC66 /* Pods-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-ProjectTests/Pods-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		84061B9723B4C8C1006C652E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84061BA123B4CB8F006C652E /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
-		84061BA323B4CEAC006C652E /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		842755B723D372AB0037B79F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		842755B923D374080037B79F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		84681D17238ECF48000BE570 /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,7 +167,6 @@
 				84681D28238ECF49000BE570 /* Info.plist */,
 				84061B9723B4C8C1006C652E /* ProfileViewController.swift */,
 				84061BA123B4CB8F006C652E /* GroupsTableViewController.swift */,
-				84061BA323B4CEAC006C652E /* FavoritesTableViewController.swift */,
 				849F9D9423C2041700FC2BB4 /* ChatViewController.swift */,
 				849F9D9623C2057100FC2BB4 /* GroupInfoViewController.swift */,
 				849F9D9823C211CA00FC2BB4 /* GroupViewCell.swift */,
@@ -472,7 +469,6 @@
 				84061B9823B4C8C1006C652E /* ProfileViewController.swift in Sources */,
 				3D4B556823F555A5001840CE /* User.swift in Sources */,
 				849F9D9723C2057100FC2BB4 /* GroupInfoViewController.swift in Sources */,
-				84061BA423B4CEAC006C652E /* FavoritesTableViewController.swift in Sources */,
 				84681D1D238ECF48000BE570 /* SceneDelegate.swift in Sources */,
 				8473245723CDBCB5001A44A8 /* EventNotificationBase.swift in Sources */,
 				84061BA223B4CB8F006C652E /* GroupsTableViewController.swift in Sources */,

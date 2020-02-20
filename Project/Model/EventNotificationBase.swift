@@ -17,18 +17,18 @@ class EventNotificationBase{
     }
     
     func observe(callback: @escaping () -> Void){
-         NotificationCenter.default.addObserver(forName: NSNotification.Name(eventName),
-         object: nil, queue: nil) { (data) in
-             callback();
-         }
-     }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(eventName),
+                                               object: nil, queue: nil) { (data) in
+                                                callback();
+        }
+    }
     
-     
-     func post(){
-         NotificationCenter.default.post(name: NSNotification.Name(eventName),
-         object: self,
-         userInfo: nil);
-     }
+    
+    func post(){
+        NotificationCenter.default.post(name: NSNotification.Name(eventName),
+                                        object: self,
+                                        userInfo: nil);
+    }
 }
 
 class EventNotificationBaseWithArgs<T>{
@@ -39,17 +39,17 @@ class EventNotificationBaseWithArgs<T>{
     }
     
     func observe(callback: @escaping (T) -> Void){
-         NotificationCenter.default.addObserver(forName: NSNotification.Name(eventName),
-         object: nil, queue: nil) { (data) in
-            let d: T = data.userInfo!["data"] as! T;
-             callback(d);
-         }
-     }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(eventName),
+                                               object: nil, queue: nil) { (data) in
+                                                let d: T = data.userInfo!["data"] as! T;
+                                                callback(d);
+        }
+    }
     
-     
+    
     func post(data:T){
-         NotificationCenter.default.post(name: NSNotification.Name(eventName),
-         object: self,
-         userInfo: ["data": data]);
-     }
+        NotificationCenter.default.post(name: NSNotification.Name(eventName),
+                                        object: self,
+                                        userInfo: ["data": data]);
+    }
 }

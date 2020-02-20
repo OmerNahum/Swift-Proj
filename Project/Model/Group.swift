@@ -55,6 +55,6 @@ class Group{
         json["participants"] = participants;
         json["lastUpdate"] = FieldValue.serverTimestamp();
         return json;
-      }
+    }
     
 }

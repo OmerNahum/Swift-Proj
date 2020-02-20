@@ -17,7 +17,6 @@ class User {
     var id: String = ""
     var groups:[String] = []
     var password:String = ""
-    var lastUpdate:Int64 = 0
     
     init(name:String, email:String, password:String) {
         self.name = name
@@ -39,8 +38,6 @@ class User {
         self.email = json["email"] as! String
         self.groups = json["groups"] as! [String]
         self.password = json["password"] as! String
-        let ts = json["lastUpdate"] as! Timestamp
-        self.lastUpdate = ts.seconds
         
     }
     
@@ -52,7 +49,6 @@ class User {
         json["password"] = self.password;
         json["name"] = self.name
         json["image"] = self.image
-        json["lastUpdate"] = FieldValue.serverTimestamp();
         return json
     }
     

@@ -14,8 +14,6 @@ class ModelFirebase{
     let db = Firestore.firestore()
     
     func add(group: Group, callback: @escaping () -> Void){
-        // var ref: DocumentReference? = nil
-        //        var ref: DocumentReference? = nil
         let user  = Auth.auth().currentUser
         if(!group.participants.contains((user?.email)!)){
             group.participants.append(user!.email!)
@@ -38,7 +36,6 @@ class ModelFirebase{
                             print("error finding user: \(err)")
                         }else{
                             let document = querySnapshot!.documents.first
-                            //let user = User(name: "",email: part, password: document!.get("password") as! String)
                             self.searchUser(userName: part){user in
                                 if let user = user{
                                     user.groups = document!.get("groups") as! [String]
@@ -64,26 +61,24 @@ class ModelFirebase{
     
     func getAllGroups(since: Int64,callback: @escaping ([Group]?)->Void){
         
-                db.collection("groups").order(by: "lastUpdate").start(at: [
-                    Timestamp(seconds: since, nanoseconds: 0)]).getDocuments { (querySnapshot, err) in
-                       if let err = err {
-                           print("Error getting documents: \(err)")
-                           callback(nil);
-                       } else {
-                           var data = [Group]();
-                           for group in querySnapshot!.documents {
-                                data.append(Group(json: group.data(),id: group.documentID));
-                           }
-                           callback(data);
-                       }
-                   };
+        db.collection("groups").order(by: "lastUpdate").start(at: [
+            Timestamp(seconds: since, nanoseconds: 0)]).getDocuments { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    callback(nil);
+                } else {
+                    var data = [Group]();
+                    for group in querySnapshot!.documents {
+                        data.append(Group(json: group.data(),id: group.documentID));
+                    }
+                    callback(data);
+                }
+        };
         
     }
     
     
     func addUser(user: User, callback: @escaping (Bool) -> Void){
-        // var ref: DocumentReference? = nil
-        //        var ref: DocumentReference? = nil
         
         
         Auth.auth().createUser(withEmail: user.email, password: user.password){authResult,error in
@@ -121,14 +116,8 @@ class ModelFirebase{
         }
     }
     
-    //        ref = db.collection("groups").addDocument(data:group.toJson(), completion: { err in
-    //            if let err = err {
-    //                print("Error adding document: \(err)")
-    //            } else {
-    //                print("Document added with ID: \(ref!.documentID)")
-    //                ModelEvents.GroupDataEvent.post();
-    //            }
-    //        })
+
+    
     func searchUser(userName: String, callback: @escaping (User?) -> Void){
         var user:User?
         db.collection("users").whereField("email", isEqualTo: userName).getDocuments(){(querySnapshot,err) in
@@ -157,6 +146,7 @@ class ModelFirebase{
                 doc?.reference.updateData([
                     "name" : name,
                     "image": image,
+                    "lastUpdate" : FieldValue.serverTimestamp()
                 ])
                 
             }
@@ -221,7 +211,8 @@ class ModelFirebase{
                     "id": group.id,
                     "image": group.image,
                     "name" : group.name,
-                    "participants": group.participants
+                    "participants": group.participants,
+                    "lastUpdate" : FieldValue.serverTimestamp()
                     
                     
                 ])

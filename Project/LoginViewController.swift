@@ -9,44 +9,39 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         errLabel.isHidden = true
+        activityLogin.isHidden = true;
         
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var usernameTxt: UITextField!
-    
-   
     @IBOutlet weak var password: UITextField!
-    
     @IBAction func unwindToLogin(segue:UIStoryboardSegue){}
-
-    
     @IBOutlet weak var errLabel: UILabel!
+    @IBOutlet weak var loginOutlet: UIButton!
+    @IBOutlet weak var activityLogin: UIActivityIndicatorView!
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     @IBAction func logInBtn(_ sender: Any) {
-        
+        loginOutlet.isEnabled = false;
+        activityLogin.isHidden = false;
         Model.instance.login(user: User(email: usernameTxt.text!,password: password.text!)){
-                      
-                      (success) in
-                      if (success == true){
-                        self.performSegue(withIdentifier: "LoginSegue", sender: self)
-                      }
-                      else{
-                          self.errLabel.isHidden = false
-                      }
-                  }
-              }
+            
+            (success) in
+            if (success == true){
+                self.activityLogin.isHidden = true;
+                self.loginOutlet.isEnabled = true
+                self.performSegue(withIdentifier: "LoginSegue", sender: self)
+            }
+            else{
+                self.errLabel.isHidden = false
+                self.loginOutlet.isEnabled = true;
+                self.activityLogin.isHidden = true
+            }
+        }
+    }
     
 }

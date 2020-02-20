@@ -14,7 +14,7 @@ import Foundation
 
 class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource{
     
-   
+    
     var  selectedImage: UIImage?;
     
     @IBOutlet weak var groupName: UITextField!
@@ -67,7 +67,6 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         activity.isHidden = true;
         tableView.dataSource = self
         tableView.delegate = self
-        // Do any additional setup after loading the view.
         
     }
     
@@ -84,13 +83,6 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     
-    
-    //    @IBAction func addContactBtn(_ sender: Any) {
-    //        let contactPicker = CNContactPickerViewController();
-    //        contactPicker.delegate = self;
-    //        contactPicker.displayedPropertyKeys = [CNContactGivenNameKey, CNContactPhoneNumbersKey];
-    //        self.present(contactPicker,animated: true, completion: nil);
-    //    }
     
     @IBAction func addPictureBtn(_ sender: Any) {
         
@@ -133,15 +125,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
         
         
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -153,8 +137,7 @@ class NewGroupViewController: UIViewController, UIImagePickerControllerDelegate,
     
     
     
-    @IBAction func favButton(_ sender: Any) {
-    }
+    
     
     
     
